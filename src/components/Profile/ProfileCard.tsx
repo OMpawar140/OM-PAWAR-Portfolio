@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Github, Linkedin, Code, X, Download } from "lucide-react";
-import MyPhoto from "@/assets/om pawar photo.png"
+import MyPhoto from "@/assets/om pawar photo.png";
+import CoverLetterPDF from "@/assets/OM_PAWAR_COVER_LETTER.pdf";
 
-// Mock PDF URL - replace with your actual PDF path
-const PDF_URL = "/src/assets/OM_PAWAR_COVER_LETTER.pdf";
+
 
 // Tooltip Component
 interface TooltipProps {
@@ -144,7 +144,7 @@ const ProfileCard: React.FC = () => {
       <PDFModal 
         isOpen={isPDFModalOpen} 
         onClose={() => setIsPDFModalOpen(false)} 
-        pdfUrl={PDF_URL}
+        pdfUrl={CoverLetterPDF}
       />
     </>
   );
