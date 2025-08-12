@@ -1,0 +1,3 @@
+declare module 'swiper/css';
+declare module 'swiper/css/effect-cube';
+declare module 'swiper/css/*';
