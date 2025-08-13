@@ -6,7 +6,7 @@ interface Props {
   onNavigate: (index: number) => void;
 }
 
-// // Tooltip Component
+// Tooltip Component
 interface TooltipProps {
   children: React.ReactNode;
   content: string;
@@ -35,21 +35,27 @@ const Tooltip: React.FC<TooltipProps> = ({ children, content }) => {
 
 const RightMenu: React.FC<Props> = ({ onNavigate }) => {
   return (
-    <div className="hidden md:flex flex-col items-center gap-6 absolute top-1/2 right-6 -translate-y-1/2 bg-[#2F2F2F] p-4 rounded-full shadow-lg z-20">
+    <div className="hidden lg:flex flex-col items-center gap-4 xl:gap-6 fixed top-1/2 right-4 xl:right-6 -translate-y-1/2 bg-[#2F2F2F] p-3 xl:p-4 rounded-full shadow-lg z-20">
        <Tooltip content="About Me">
-         <User className="text-white hover:text-[#00AEEF] cursor-pointer" onClick={() => onNavigate(0)} />
+         <User 
+           className="text-white hover:text-[#00AEEF] cursor-pointer w-5 h-5 xl:w-6 xl:h-6 transition-colors" 
+           onClick={() => onNavigate(0)} 
+         />
        </Tooltip>
        
        <Tooltip content="Projects">
-      <Projector className="text-white hover:text-[#00AEEF] cursor-pointer" onClick={() => onNavigate(1)} />
-        </Tooltip>
+         <Projector 
+           className="text-white hover:text-[#00AEEF] cursor-pointer w-5 h-5 xl:w-6 xl:h-6 transition-colors" 
+           onClick={() => onNavigate(1)} 
+         />
+       </Tooltip>
         
-        <Tooltip content="Coding Profiles">
-      <Code className="text-white hover:text-[#00AEEF] cursor-pointer" onClick={() => onNavigate(2)} />
-        </Tooltip>
-        
-        {/* <Mail className="text-white hover:text-[#00AEEF] cursor-pointer" onClick={() => onNavigate(3)} /> */}
-      {/* <Mail className="text-white hover:text-[#00AEEF] cursor-pointer" onClick={() => onNavigate(3)} /> */}
+       <Tooltip content="Coding Profiles">
+         <Code 
+           className="text-white hover:text-[#00AEEF] cursor-pointer w-5 h-5 xl:w-6 xl:h-6 transition-colors" 
+           onClick={() => onNavigate(2)} 
+         />
+       </Tooltip>
     </div>
   );
 };

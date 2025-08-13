@@ -1,3 +1,5 @@
+// src/components/Pages/CodingProfiles.tsx
+
 import React from "react";
 import { Code2, Target, ExternalLink } from "lucide-react";
 
@@ -78,11 +80,11 @@ const PlatformCard: React.FC<PlatformCardProps> = ({ profile }) => {
   const getPlatformIcon = (platform: string) => {
     switch (platform.toLowerCase()) {
       case 'leetcode':
-        return <Code2 className="w-5 h-5 text-orange-400" />;
+        return <Code2 className="w-4 h-4 text-orange-400 flex-shrink-0" />;
       case 'geeksforgeeks':
-        return <Target className="w-5 h-5 text-green-400" />;
+        return <Target className="w-4 h-4 text-green-400 flex-shrink-0" />;
       default:
-        return <Code2 className="w-5 h-5 text-gray-400" />;
+        return <Code2 className="w-4 h-4 text-gray-400 flex-shrink-0" />;
     }
   };
 
@@ -109,24 +111,23 @@ const PlatformCard: React.FC<PlatformCardProps> = ({ profile }) => {
 
   return (
     <div 
-      className="m-auto bg-[#1F1F1F] p-4 rounded-lg w-62 h-32 flex-shrink-0 cursor-pointer hover:bg-[#2A2A2A] transition-all duration-200 flex flex-col justify-between hover:scale-105 hover:shadow-lg"
+      className="bg-[#1F1F1F] p-3 rounded-lg cursor-pointer hover:bg-[#2A2A2A] transition-all duration-200 hover:scale-[1.02] hover:shadow-lg min-h-[100px] w-full"
       onClick={handleCardClick}
     >
-      <div className="flex-1 overflow-hidden">
-        <div className="flex items-center gap-2 mb-2">
-          {getPlatformIcon(profile.platform)}
-          <h3 className="text-white font-semibold text-sm leading-tight">{profile.platform}</h3>
+      <div className="flex flex-col h-full justify-between">
+        <div className="flex-1">
+          <div className="flex items-center gap-2 mb-2">
+            {getPlatformIcon(profile.platform)}
+            <h3 className="text-white font-semibold text-sm leading-tight flex-1">{profile.platform}</h3>
+          </div>
+          <p className="text-gray-400 text-xs truncate">@{profile.username}</p>
         </div>
-        <p className="text-gray-400 text-xs line-clamp-1">@{profile.username}</p>
-        {/* <p className="text-gray-500 text-xs mt-1">
-          {profile.stats.problemsSolved} problems solved
-        </p> */}
-      </div>
-      <div className="flex items-center justify-between">
-        <span className={`text-xs px-2 py-1 rounded text-white ${getPlatformColor(profile.platform)}`}>
-          {profile.isActive ? 'Active' : 'Inactive'}
-        </span>
-        <ExternalLink className="w-4 h-4 text-gray-400" />
+        <div className="flex items-center justify-between mt-2 pt-2">
+          <span className={`text-xs px-2 py-1 rounded text-white ${getPlatformColor(profile.platform)}`}>
+            {profile.isActive ? 'Active' : 'Inactive'}
+          </span>
+          <ExternalLink className="w-3 h-3 text-gray-400 flex-shrink-0" />
+        </div>
       </div>
     </div>
   );
@@ -135,24 +136,31 @@ const PlatformCard: React.FC<PlatformCardProps> = ({ profile }) => {
 // Main Coding Profiles Component
 const CodingProfiles: React.FC = () => {
   return (
-    <div className="flex flex-col justify-center h-full text-left">
-      <p className="text-gray-400 text-sm">My Coding Journey</p>
-      <h1 className="text-white text-3xl font-bold">DSA & Programming Platforms</h1>
-      <p className="text-gray-300 mt-6 leading-relaxed">
-        Showcasing my competitive programming journey across various platforms. 
-        From algorithmic problem-solving to contest participation, here's my 
-        coding profile highlighting consistent practice and continuous improvement in 
-        data structures and algorithms. Click on any card to visit the profile directly.
-      </p>
-      
-      <div className="mt-6">
-        <div className="flex gap-4 pb-4">
-          {codingProfilesData.map((profile) => (
-            <PlatformCard 
-              key={profile.id}
-              profile={profile}
-            />
-          ))}
+    <div className="h-full w-full overflow-hidden">
+      <div className="flex flex-col h-full p-2 sm:p-4">
+        <div className="flex-shrink-0">
+          <p className="text-gray-400 text-xs sm:text-sm">My Coding Journey</p>
+          <h1 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-1">DSA & Programming Platforms</h1>
+        </div>
+        
+        <div className="flex-shrink-0 mt-2 sm:mt-3">
+          <p className="text-gray-300 leading-relaxed text-xs sm:text-sm line-clamp-3">
+            Showcasing my competitive programming journey across various platforms. 
+            From algorithmic problem-solving to contest participation, here's my 
+            coding profile highlighting consistent practice and continuous improvement.
+          </p>
+        </div>
+        
+        <div className="flex-1 mt-3 sm:mt-4 min-h-0">
+          <div className="h-full overflow-y-auto overflow-x-hidden">
+            <div className="flex flex-col gap-3 sm:gap-4 pb-4">
+              {codingProfilesData.map((profile) => (
+                <div key={profile.id} className="flex-shrink-0">
+                  <PlatformCard profile={profile} />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+// src/components/Pages/Projects.tsx
 import React, { useState } from "react";
 import {
   Dialog,
@@ -12,11 +13,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Info, ExternalLink } from "lucide-react";
 
-// Types for project data
+// -------------------- Types --------------------
 interface Project {
   id: string;
   name: string;
@@ -24,10 +25,10 @@ interface Project {
   techStack: string[];
   images: string[];
   shortDescription: string;
-  status: 'launching-soon' | 'live' | 'in-development';
+  status: "launching-soon" | "live" | "in-development";
 }
 
-// Your actual projects data
+// -------------------- Data --------------------
 const projectsData: Project[] = [
   {
     id: "talent-acquisition-system",
@@ -38,7 +39,6 @@ const projectsData: Project[] = [
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=400&fit=crop",
       "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop",
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop"
-      
     ],
     shortDescription: "AI-Powered Recruitment with RAG",
     status: "launching-soon"
@@ -89,7 +89,6 @@ const projectsData: Project[] = [
     techStack: ["React.js", "Tailwind CSS", "ShadCN/UI", "Node.js", "Express", "Python", "FastAPI", "PostgreSQL", "MongoDB", "OpenAI API", "AWS EC2", "Docker", "JWT"],
     images: [
       "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=400&fit=crop",
-      // "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop",
       "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=400&fit=crop"
     ],
     shortDescription: "AI-Driven Study Planning",
@@ -97,7 +96,7 @@ const projectsData: Project[] = [
   }
 ];
 
-// Project Card Component
+// -------------------- Project Card --------------------
 interface ProjectCardProps {
   project: Project;
   onViewProject: (project: Project) => void;
@@ -105,34 +104,35 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onViewProject }) => {
   return (
-    <div 
-      className="bg-[#1F1F1F] p-4 rounded-lg w-72 flex-shrink-0 cursor-pointer hover:bg-[#2A2A2A] transition-colors duration-200"
+    <div
+      className=" bg-black/20 p-3 rounded-lg cursor-pointer hover:bg-[#2A2A2A] transition-colors duration-200 w-full"
       onClick={() => onViewProject(project)}
     >
-      <h3 className="text-white font-semibold text-sm leading-tight break-words whitespace-normal">
+      <h3 className="text-white font-semibold text-sm leading-tight break-words whitespace-normal line-clamp-2 mb-2">
         {project.name}
       </h3>
-      <p className="text-gray-400 text-xs mt-2">{project.shortDescription}</p>
-      <div className="flex items-center justify-between mt-3">
+      <p className="text-gray-400 text-xs mb-3 line-clamp-1">
+        {project.shortDescription}
+      </p>
+      <div className="flex items-center justify-between">
         <span
-          className={`text-xs px-2 py-1 rounded ${
-            project.status === 'live' 
-              ? 'bg-green-600 text-green-100' 
-              : project.status === 'launching-soon'
-              ? 'bg-orange-600 text-orange-100'
-              : 'bg-blue-600 text-blue-100'
+          className={`text-xs px-2 py-1 rounded flex-shrink-0 ${
+            project.status === "live"
+              ? "bg-green-600 text-green-100"
+              : project.status === "launching-soon"
+              ? "bg-orange-600 text-orange-100"
+              : "bg-blue-600 text-blue-100"
           }`}
         >
-          {project.status.replace('-', ' ')}
+          {project.status.replace("-", " ")}
         </span>
-        <Info className="w-4 h-4 text-gray-400" />
+        <Info className="w-3 h-3 text-gray-400 flex-shrink-0 ml-2" />
       </div>
     </div>
-
   );
 };
 
-// Tooltip Component
+// -------------------- Tooltip --------------------
 interface TooltipProps {
   children: React.ReactNode;
   content: string;
@@ -159,36 +159,40 @@ const Tooltip: React.FC<TooltipProps> = ({ children, content }) => {
   );
 };
 
-// Project Dialog Component
+// -------------------- Project Dialog --------------------
 interface ProjectDialogProps {
   project: Project | null;
   isOpen: boolean;
   onClose: () => void;
 }
 
-const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, isOpen, onClose }) => {
+const ProjectDialog: React.FC<ProjectDialogProps> = ({
+  project,
+  isOpen,
+  onClose,
+}) => {
   if (!project) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[80vh] bg-[#1A1A1A] border-gray-700 p-0 overflow-hidden">
-        <DialogHeader className="p-6 pb-0">
-          <DialogTitle className="text-white text-xl break-words">
+      <DialogContent className="max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-3xl max-h-[90vh] sm:max-h-[80vh] bg-[#1A1A1A] border-gray-700 p-0 overflow-hidden mx-4 sm:mx-auto">
+        <DialogHeader className="p-4 sm:p-6 pb-0">
+          <DialogTitle className="text-white text-base sm:text-lg md:text-xl break-words pr-8">
             {project.name}
           </DialogTitle>
         </DialogHeader>
 
-        {/* Make inner content scrollable */}
-        <ScrollArea className="h-[calc(80vh-4rem)] px-6">
-          <div className="space-y-6 pb-6">
+        {/* Responsive scrollable content */}
+        <ScrollArea className="h-[calc(90vh-4rem)] sm:h-[calc(80vh-4rem)] px-4 sm:px-6">
+          <div className="space-y-4 sm:space-y-6 pb-6">
             {/* Carousel */}
             <Carousel className="w-full">
               <CarouselContent>
                 {project.images.map((image, index) => (
                   <CarouselItem key={index}>
                     <div className="aspect-video bg-gray-800 rounded-lg overflow-hidden">
-                      <img 
-                        src={image} 
+                      <img
+                        src={image}
                         alt={`${project.name} screenshot ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
@@ -196,26 +200,30 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, isOpen, onClose 
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="bg-[#2A2A2A] border-gray-600 text-white hover:bg-[#3A3A3A]" />
-              <CarouselNext className="bg-[#2A2A2A] border-gray-600 text-white hover:bg-[#3A3A3A]" />
+              <CarouselPrevious className="bg-[#2A2A2A] border-gray-600 text-white hover:bg-[#3A3A3A] left-2" />
+              <CarouselNext className="bg-[#2A2A2A] border-gray-600 text-white hover:bg-[#3A3A3A] right-2" />
             </Carousel>
 
             {/* Description */}
             <div>
-              <h3 className="text-white text-lg font-semibold mb-2">Description</h3>
-              <p className="text-gray-300 leading-relaxed text-sm">
+              <h3 className="text-white text-base sm:text-lg font-semibold mb-2">
+                Description
+              </h3>
+              <p className="text-gray-300 leading-relaxed text-xs sm:text-sm">
                 {project.description}
               </p>
             </div>
 
             {/* Tech Stack */}
             <div>
-              <h3 className="text-white text-lg font-semibold mb-3">Tech Stack</h3>
+              <h3 className="text-white text-base sm:text-lg font-semibold mb-3">
+                Tech Stack
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {project.techStack.map((tech, index) => (
-                  <span 
+                  <span
                     key={index}
-                    className="bg-[#2A2A2A] text-gray-300 px-3 py-1 rounded-full text-xs"
+                    className="bg-[#2A2A2A] text-gray-300 px-2 sm:px-3 py-1 rounded-full text-xs"
                   >
                     {tech}
                   </span>
@@ -224,13 +232,13 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, isOpen, onClose 
             </div>
 
             {/* Button */}
-            <div className="flex justify-end pt-4  mb-8">
+            <div className="flex justify-end pt-4 mb-8">
               <Tooltip content="Coming Soon!">
-                <Button 
-                  disabled={project.status !== 'live'}
-                  className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg flex items-center gap-2"
+                <Button
+                  disabled={project.status !== "live"}
+                  className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-4 sm:px-6 py-2 rounded-lg flex items-center gap-2 text-sm"
                 >
-                  <ExternalLink className="w-4 h-4" />
+                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                   View Project
                 </Button>
               </Tooltip>
@@ -242,7 +250,7 @@ const ProjectDialog: React.FC<ProjectDialogProps> = ({ project, isOpen, onClose 
   );
 };
 
-// Main Projects Component
+// -------------------- Main Projects Component --------------------
 const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -259,33 +267,44 @@ const Projects: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center h-full text-left">
-        <p className="text-gray-400 text-sm">My Work</p>
-        <h1 className="text-white text-3xl font-bold">Projects</h1>
-        <p className="text-gray-300 mt-6 leading-relaxed">
-          I have worked on a variety of web applications, from small business websites 
-          to large-scale platforms. My focus is always on clean design, efficient 
-          performance, and creating a seamless user experience.
-        </p>
-        
-        <div className="mt-6">
-          <ScrollArea className="w-full overflow-x-auto">
-            <div className="flex flex-nowrap gap-4 pb-4">
-              {projectsData.map((project) => (
-                <ProjectCard 
-                  key={project.id}
-                  project={project}
-                  onViewProject={handleViewProject}
-                />
-              ))}
-            </div>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
+      <div className="h-full w-full overflow-hidden">
+        <div className="flex flex-col h-full p-2 sm:p-4">
+          {/* Header */}
+          <div className="flex-shrink-0">
+            <p className="text-gray-400 text-xs sm:text-sm">My Work</p>
+            <h1 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-1">
+              Projects
+            </h1>
+          </div>
+
+          {/* Intro */}
+          <div className="flex-shrink-0 mt-2 sm:mt-3">
+            <p className="text-gray-300 leading-relaxed text-xs sm:text-sm line-clamp-3">
+              I have worked on a variety of web applications, from small
+              business websites to large-scale platforms. My focus is always on
+              clean design and performance.
+            </p>
+          </div>
+
+          {/* Scrollable project list */}
+          <div className="flex-1 mt-3 sm:mt-4 min-h-0">
+            <ScrollArea className="h-full max-h-[40vh] sm:max-h-[50vh] md:max-h-[60vh] lg:max-h-[65vh] pr-2">
+              <div className="flex flex-col gap-3 sm:gap-4 pb-4">
+                {projectsData.map((project) => (
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onViewProject={handleViewProject}
+                  />
+                ))}
+              </div>
+            </ScrollArea>
+          </div>
         </div>
       </div>
 
       {/* Project Dialog */}
-      <ProjectDialog 
+      <ProjectDialog
         project={selectedProject}
         isOpen={isDialogOpen}
         onClose={handleCloseDialog}

@@ -1,9 +1,9 @@
+// src/components/Profile/ProfileCard.tsx
+
 import React, { useState } from "react";
 import { Github, Linkedin, Code, X, Download } from "lucide-react";
 import MyPhoto from "@/assets/om pawar photo.png";
 import CoverLetterPDF from "@/assets/OM_PAWAR_COVER_LETTER.pdf";
-
-
 
 // Tooltip Component
 interface TooltipProps {
@@ -43,24 +43,24 @@ const PDFModal: React.FC<PDFModalProps> = ({ isOpen, onClose, pdfUrl }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-[#2F2F2F] rounded-lg w-11/12 h-5/6 max-w-4xl flex flex-col">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-[#2F2F2F] rounded-lg w-full h-full max-w-6xl max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="flex justify-between items-center p-4 border-b">
-          <h3 className="text-lg font-semibold text-white">Cover Letter</h3>
+        <div className="flex justify-between items-center p-4 border-b border-gray-600 flex-shrink-0">
+          <h3 className="text-base sm:text-lg font-semibold text-white">Cover Letter</h3>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 transition-colors"
+            className="text-gray-400 hover:text-gray-200 transition-colors p-1"
           >
-            <X size={24} />
+            <X size={20} className="sm:w-6 sm:h-6" />
           </button>
         </div>
         
         {/* PDF Viewer */}
-        <div className="flex-1 p-4">
+        <div className="flex-1 p-4 min-h-0">
           <iframe
             src={`${pdfUrl}#toolbar=1&navpanes=0&scrollbar=1`}
-            className="w-full h-full border border-gray-300 rounded"
+            className="w-full h-full border border-gray-500 rounded"
             title="PDF Preview"
           />
         </div>
@@ -76,65 +76,61 @@ const ProfileCard: React.FC = () => {
     setIsPDFModalOpen(true);
   };
 
-  // const handlePreviewCV = () => {
-  //   setIsPDFModalOpen(true);
-  // };
-
   return (
     <>
-      <div className="rounded-2xl p-8 w-80 h-[450px] flex flex-col items-center justify-between bg-">
+      <div className="w-full flex flex-col items-center justify-between space-y-4 sm:space-y-6">
         {/* Profile Image */}
-        <div className="flex flex-col items-center space-y-3">
+        <div className="flex flex-col items-center space-y-2 sm:space-y-3">
           <img
             src={MyPhoto}
             alt="Profile"
-            className="rounded-full w-36 h-36 border-3 border-[#00AEEF] hover:scale-105 hover:shadow-lg transition-transform duration-300"
+            className="rounded-full w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 border-2 sm:border-3 border-[#00AEEF] hover:scale-105 hover:shadow-lg transition-transform duration-300"
           />
-          <h1 className="text-white text-3xl font-bold">Om Pawar</h1>
-          <p className="text-gray-400 text-lg">Web Developer</p>
+          <h1 className="text-white text-xl sm:text-2xl md:text-3xl font-bold text-center">Om Pawar</h1>
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg text-center">Web Developer</p>
         </div>
 
         {/* Social Links */}
-        <div className="flex gap-4">
+        <div className="flex gap-3 sm:gap-4">
           <a
             href="https://github.com/OMpawar140/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white hover:text-[#00AEEF] transition-colors"
+            className="text-white hover:text-[#00AEEF] transition-colors p-2"
           >
             <Tooltip content="Github">
-              <Github size={20} />
+              <Github size={18} className="sm:w-5 sm:h-5" />
             </Tooltip>
           </a>
           <a
             href="https://www.linkedin.com/in/om-pawar-68b086270/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white hover:text-[#00AEEF] transition-colors"
+            className="text-white hover:text-[#00AEEF] transition-colors p-2"
           >
             <Tooltip content="Linkedin">
-              <Linkedin size={20} />
+              <Linkedin size={18} className="sm:w-5 sm:h-5" />
             </Tooltip>
           </a>
           <a
             href="https://leetcode.com/u/retreat_caliber/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white hover:text-[#00AEEF] transition-colors"
+            className="text-white hover:text-[#00AEEF] transition-colors p-2"
           >
             <Tooltip content="LeetCode">
-              <Code size={20} />
+              <Code size={18} className="sm:w-5 sm:h-5" />
             </Tooltip>
           </a>
         </div>
 
-        {/* CV Buttons */}
-        <div className="flex flex-col gap-3 w-full">
+        {/* CV Button */}
+        <div className="w-full max-w-xs">
           <button 
             onClick={handleDownloadCV}
-            className="flex items-center justify-center gap-2 px-6 py-3 bg-[#00AEEF] text-white text-lg font-semibold rounded-full hover:bg-[#0099d4] transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-[#00AEEF] text-white text-sm sm:text-base md:text-lg font-semibold rounded-full hover:bg-[#0099d4] transition-colors"
           >
-            <Download size={18} />
+            <Download size={16} className="sm:w-4 sm:h-4 md:w-5 md:h-5" />
             Download CV
           </button>
         </div>
