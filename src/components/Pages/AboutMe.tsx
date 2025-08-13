@@ -6,7 +6,7 @@ const AboutMe: React.FC = () => {
     {
       title: "👨‍💻 Who I Am",
       content:
-        "Final-year B.Tech student in Information Technology & Services, specializing in AI-driven Full-Stack Development. Passionate about building impactful digital experiences.",
+        "Final-year B.Tech student in Computer Science and Engineering, specializing in AI-driven Full-Stack Development. Passionate about building impactful digital experiences.",
     },
     {
       title: "🛠️ Skills & Expertise",
