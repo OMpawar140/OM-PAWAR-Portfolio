@@ -1,4 +1,3 @@
-// src/components/Pages/AboutMe.tsx
 import React from "react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -27,38 +26,44 @@ const AboutMe: React.FC = () => {
   ];
 
   return (
-    <div className="h-full w-full flex flex-col p-2 sm:p-4">
-      {/* Header */}
-      <p className="text-gray-400 text-xs sm:text-sm">My Self</p>
-      <h1 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-1">
-        Om Pawar
-      </h1>
-
-      {/* Responsive Scrollable Content */}
-      <ScrollArea
-        className="
-          mt-4 sm:mt-6 lg:mt-8
-          flex-1
-          rounded-md border border-gray-800
-          max-h-[40vh] sm:max-h-[50vh] md:max-h-[60vh] lg:max-h-[65vh]
-        "
-      >
-        <div className="p-3 sm:p-4 space-y-4">
-          {infoBlocks.map((block, idx) => (
-            <div
-              key={idx}
-              className="p-3 sm:p-4 border border-gray-700 rounded-lg bg-black/20 backdrop-blur-md hover:border-gray-500 transition-colors"
-            >
-              <h2 className="text-white font-semibold text-sm sm:text-base lg:text-lg mb-1">
-                {block.title}
-              </h2>
-              <p className="text-gray-300 text-xs sm:text-sm lg:text-base leading-relaxed">
-                {block.content}
-              </p>
-            </div>
-          ))}
+    <div className="h-full w-full overflow-hidden">
+      <div className="flex flex-col h-full p-2 sm:p-4">
+        {/* Header */}
+        <div className="flex-shrink-0">
+          <p className="text-gray-400 text-xs sm:text-sm">My Self</p>
+          <h1 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mt-1">
+            Om Pawar
+          </h1>
         </div>
-      </ScrollArea>
+
+        {/* Intro / Summary */}
+        <div className="flex-shrink-0 mt-2 sm:mt-3">
+          <p className="text-gray-300 leading-relaxed text-xs sm:text-sm">
+            A passionate developer with strong skills in full-stack development and AI-driven solutions.
+          </p>
+        </div>
+
+        {/* Scrollable Section */}
+        <div className="flex-1 mt-3 sm:mt-4 min-h-0">
+          <ScrollArea className="h-full pr-2">
+            <div className="flex flex-col gap-3 sm:gap-4 pb-4">
+              {infoBlocks.map((block, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 sm:p-4 border border-gray-700 rounded-lg bg-black/20 backdrop-blur-md hover:border-gray-500 transition-colors"
+                >
+                  <h2 className="text-white font-semibold text-sm sm:text-base lg:text-lg mb-1">
+                    {block.title}
+                  </h2>
+                  <p className="text-gray-300 text-xs sm:text-sm lg:text-base leading-relaxed">
+                    {block.content}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+      </div>
     </div>
   );
 };
